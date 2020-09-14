@@ -22,12 +22,17 @@ class App extends React.Component {
     })
   }
 
+  handleStart = () => {
+    this.handleNewCombo()
+    setInterval(this.handleNewCombo, 5000)
+  }
+
   render(){
     return (
       <div className="App">
         <Header></Header>
         <Main></Main>
-        <h2 onClick={this.handleNewCombo}>New Combo</h2>
+        <h2 onClick={this.handleStart}>New Combo</h2>
         <h3>{this.state.strike_one}</h3>
         <h3>{this.state.strike_two}</h3>
         <h3>{this.state.strike_three}</h3>
