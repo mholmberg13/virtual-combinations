@@ -11,6 +11,7 @@ class App extends React.Component {
     strike_two: "",
     strike_three: "",
     strike_four: "",
+    strike_five: "",
     three_checked: false,
     four_checked: false,
     five_checked: false
@@ -24,6 +25,27 @@ class App extends React.Component {
       strike_two: strikes[Math.floor(Math.random() * strikes.length)],
       strike_three: strikes[Math.floor(Math.random() * strikes.length)]
     })
+
+    if (this.state.four_checked === true) {
+      this.setState({
+        strike_four: strikes[Math.floor(Math.random() * strikes.length)]
+      })
+    } else if (this.state.four_checked === false) {
+      this.setState({
+        strike_four: ""
+      })
+    }
+
+    if (this.state.five_checked === true) {
+      this.setState({
+        strike_four: strikes[Math.floor(Math.random() * strikes.length)],
+        strike_five: strikes[Math.floor(Math.random() * strikes.length)]
+      })
+    } else if (this.state.five_checked === false ) {
+      this.setState({
+        strike_five: ""
+      })
+    }
   }
 
   handleStart = () => {
@@ -93,6 +115,8 @@ class App extends React.Component {
         <h3>{this.state.strike_one}</h3>
         <h3>{this.state.strike_two}</h3>
         <h3>{this.state.strike_three}</h3>
+        <h3>{this.state.strike_four}</h3>
+        <h3>{this.state.strike_five}</h3>
       </div>
     );
   }
