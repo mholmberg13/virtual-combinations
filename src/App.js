@@ -12,9 +12,9 @@ class App extends React.Component {
     strike_three: "",
     strike_four: "",
     strike_five: "",
-    three_checked: false,
     four_checked: false,
-    five_checked: false
+    five_checked: false,
+    combo_length: 3
   }
 
 
@@ -28,9 +28,15 @@ class App extends React.Component {
 
     if (this.state.four_checked === true) {
       this.setState({
+        combo_length: Math.floor(Math.random() * 5) + 3
+      })
+    }
+
+    if (this.state.combo_length === 4) {
+      this.setState({
         strike_four: strikes[Math.floor(Math.random() * strikes.length)]
       })
-    } else if (this.state.four_checked === false) {
+    } else {
       this.setState({
         strike_four: ""
       })
@@ -38,14 +44,21 @@ class App extends React.Component {
 
     if (this.state.five_checked === true) {
       this.setState({
+        combo_length: Math.floor(Math.random() * 6) + 3
+      })
+    } 
+    
+    if (this.state.combo_length === 5) {
+      this.setState({
         strike_four: strikes[Math.floor(Math.random() * strikes.length)],
         strike_five: strikes[Math.floor(Math.random() * strikes.length)]
       })
-    } else if (this.state.five_checked === false ) {
+    } else {
       this.setState({
         strike_five: ""
       })
     }
+    
   }
 
   handleStart = () => {
@@ -55,20 +68,6 @@ class App extends React.Component {
 
   handleStop = () => {
     clearInterval(this.intervalId)
-  }
-
-  toggleThreeCheck = () => {
-    if (this.state.three_checked === false) {
-      this.setState({
-        three_checked: true
-      })
-    }
-    if (this.state.three_checked === true) {
-      this.setState({
-        three_checked: false
-      })
-    }
-    console.log(this.state.three_checked)
   }
 
   toggleFourCheck = () => {
@@ -99,13 +98,23 @@ class App extends React.Component {
     console.log(this.state.five_checked)
   }
 
+  handleFourCombo = () => {
+    this.setState({
+      combo_length: Math.floor(Math.random() * 4) + 3
+    })
+  }
+
+  handleFiveCombo = () => {
+    this.setState({
+      combo_length: Math.floor(Math.random() * 5) + 3
+    })
+  }
+
   render(){
     return (
       <div className="App">
         <Header></Header>
         <Main></Main>
-        <input type="checkbox" id="select3" name="select3" value="3 Strike Combos" onChange={this.toggleThreeCheck}/>
-        <label for="select3">3 Strike Combos</label><br></br>
         <input type="checkbox" id="select4" name="select4" value="4 Strike Combos" onChange={this.toggleFourCheck}/>
         <label for="select4">4 Strike Combos</label><br></br>
         <input type="checkbox" id="select5" name="select5" value="4 Strike Combos" onChange={this.toggleFiveCheck}/>
