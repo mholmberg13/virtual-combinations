@@ -27,9 +27,8 @@ class App extends React.Component {
     })
 
     if (this.state.four_checked === true) {
-      this.setState({
-        combo_length: Math.floor(Math.random() * 5) + 3
-      })
+      this.handleFourCombo()
+      console.log(this.state.combo_length)
     }
 
     if (this.state.combo_length === 4) {
@@ -44,8 +43,9 @@ class App extends React.Component {
 
     if (this.state.five_checked === true) {
       this.setState({
-        combo_length: Math.floor(Math.random() * 6) + 3
+        combo_length: Math.floor(Math.random() * 5) + 3
       })
+      console.log(this.state.combo_length)
     } 
     
     if (this.state.combo_length === 5) {
@@ -63,7 +63,7 @@ class App extends React.Component {
 
   handleStart = () => {
     this.handleNewCombo()
-    this.intervalId = setInterval(this.handleNewCombo, 4000)
+    this.intervalId = setInterval(this.handleNewCombo, 3000)
   }
 
   handleStop = () => {
@@ -114,20 +114,23 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header></Header>
-        <Main></Main>
-        <input type="checkbox" id="select4" name="select4" value="4 Strike Combos" onChange={this.toggleFourCheck}/>
-        <label for="select4">4 Strike Combos</label><br></br>
-        <input type="checkbox" id="select5" name="select5" value="4 Strike Combos" onChange={this.toggleFiveCheck}/>
-        <label for="select5">5 Strike Combos</label><br></br>
-        <h2 onClick={this.handleStart}>START</h2>
-        <h2 onClick={this.handleStop}>STOP</h2>
-        <h3>{this.state.strike_one}</h3>
-        <h3>{this.state.strike_two}</h3>
-        <h3>{this.state.strike_three}</h3>
-        <h3>{this.state.strike_four}</h3>
-        <h3>{this.state.strike_five}</h3>
+        <Main
+          handleStart={this.handleStart}
+          handleStop={this.handleStop}
+          // handleNewCombo={this.handleNewCombo}
+          toggleFourCheck={this.toggleFourCheck}
+          toggleFiveCheck={this.toggleFiveCheck}
+          strike_one={this.state.strike_one}
+          strike_two={this.state.strike_two}
+          strike_three={this.state.strike_three}
+          strike_four={this.state.strike_four}
+          strike_five={this.state.strike_five}
+        />
       </div>
     );
+  }
+  componentDidMount() {
+    console.log(this.state.four_checked)
   }
 }
 
